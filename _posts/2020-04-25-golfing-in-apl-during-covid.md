@@ -5,11 +5,12 @@ date: 2020-04-26 21:18
 comments: true
 external-url:
 categories: Software
+keywords: "Tag1"
 ---
 
 > A _niven_ number is a non-negative number that is divisible by the sum of its digits. Write a function/method named `niven`, which prints all the _niven_ numbers from 0 to 100 inclusive.
 
-Being in quarantine during the SARS-CoV-2 outbreak is having a massive impact on our everyday lives, particularly in our physical and mental health. It seems one is always working, without any notion of the passage of time. Social distancing meant an increase in social activity in messaging channels, with all sorts of groups spawning into existence. One of them was about _code golfing_, a recreational computer programming competition in which participants strive to achieve the shortest possible source code that implements a particular algorithm. 
+Being in quarantine during the SARS-CoV-2 outbreak is having a massive impact on our everyday lives, particularly in our physical and mental health. It seems one is always working, without any notion of the passage of time. Social distancing meant an increase in social activity in messaging channels, with all sorts of groups spawning into existence. One of them was about _code golfing_, a recreational computer programming competition in which participants strive to achieve the shortest possible source code that implements a particular algorithm.
 
 The channel started to grow in participants, and everyone was hating Haskell. That was until Rui Gonçalves came up with a solution in APL for a [particular problem](https://github.com/hugoferreira/golf-during-covid/blob/master/day5.md) that was less than 1/3 of the shortest Haskell solution for that day. The rest is history[^1]. In this small post, I will try to explain my rationale from coming up with a working solution written in APL, and shortening it by _incremental refactoring_.
 
