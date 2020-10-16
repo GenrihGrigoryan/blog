@@ -3,4 +3,4 @@ Disallow: /.bundle/
 Disallow: /.gitignore
 Allow: /
 
-Sitemap: http://hugosereno.eu/sitemap.xml
+Sitemap: http://blog.genrihgrigoryan.com/sitemap.xml
