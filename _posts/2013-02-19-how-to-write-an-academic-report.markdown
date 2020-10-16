@@ -5,6 +5,7 @@ date: 2013-02-19 00:38
 comments: true
 external-url:
 categories: Others
+tags: classic_hollywood second hololens
 ---
 
 Here are some tips for writing an undergraduate academic report:

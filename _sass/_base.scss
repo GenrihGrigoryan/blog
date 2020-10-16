@@ -14,6 +14,12 @@ body {
   font-weight: $base-font-weight;
   color: $text-color;
 
+  .custom_style{
+    color: $bg-color-darker;
+    font-weight: $base-font-weight;
+    font-size: $small-font-size;
+  }
+
   .et-symbol {
     svg {
       height: 0.98em;
@@ -52,23 +58,23 @@ body {
   }
 
   h1, h2, h3 {
-    font-family: $header-font-weight;
+    font-family: $header-font-family;
     line-height: 1.4em;
-    font-weight: bold;
+    font-weight: $header-font-weight;
   }
 
   h2 {
-    font-size: 1.6em;
-    margin-top: 2em;
-    margin-bottom: 1em;
+    font-size: 1.5em;
+    margin-top: 3em;
+    margin-bottom: 0.2em;
   }
 
   h3 {
     font-family: $title-font-family;
     font-size: 1.2em;
-    font-variant: small-caps;
-    text-transform: lowercase;
-    letter-spacing: 0.15em;
+    //font-variant: small-caps;
+    //text-transform: lowercase;
+    //letter-spacing: 0.15em;
   }
 
   strong {
@@ -90,6 +96,7 @@ article {
     font-weight: $base-font-weight;
   }
 
+  /*
   > :first-child {
     min-height: 2em + $base-line-height;
 
@@ -104,6 +111,7 @@ article {
       margin: .12em .15em 0 -.02em;
     }
   }
+*/
 
   br {
     display: block;

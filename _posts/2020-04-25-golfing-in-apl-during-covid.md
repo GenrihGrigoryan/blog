@@ -1,110 +1,45 @@
 ---
 layout: post
-title: Golfing in APL during COVID
+title: Апплодисменты
 date: 2020-04-26 21:18
 comments: true
-external-url:
-categories: Software
-keywords: "Tag1"
+external-url: "https://genrihgrigoryan.com"
+categories: Философия Рассказы Эссе
+keywords:
+tags: classic_hollywood second hololens Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 ---
 
-> A _niven_ number is a non-negative number that is divisible by the sum of its digits. Write a function/method named `niven`, which prints all the _niven_ numbers from 0 to 100 inclusive.
+Лишь *только* N вышел на **сцену**, зал охватила ::волна:: восторженных окликов. Дождавшись окончания бурных аплодисментов, он, искренне улыбаясь, ~~начал~~ свою речь:
+"Вот и пришло время выбраться из моей берлоги самолюбования. Я был бы лицемерным лжецом, сказав, что рад вас видеть, но не _хочу_ и __обидеть__ своею холодностью, так что ограничимся дружелюбным приветствием.
 
-Being in quarantine during the SARS-CoV-2 outbreak is having a massive impact on our everyday lives, particularly in our physical and mental health. It seems one is always working, without any notion of the passage of time. Social distancing meant an increase in social activity in messaging channels, with all sorts of groups spawning into existence. One of them was about _code golfing_, a recreational computer programming competition in which participants strive to achieve the shortest possible source code that implements a particular algorithm.
+Не из личного желания выхожу я вновь на сцену, а ради важной цели, о которой намерен поведать вам позднее. 
+Бывало ли у вас такое осознание, будто бы должны непременно совершить что-то, а если не совершите, то и винить себя будете всю оставшуюся жизнь? Как если бы, проходя мимо озера, увидели тонущего и при возможности спасти, не спасли бы.
 
-The channel started to grow in participants, and everyone was hating Haskell. That was until Rui Gonçalves came up with a solution in APL for a [particular problem](https://github.com/hugoferreira/golf-during-covid/blob/master/day5.md) that was less than 1/3 of the shortest Haskell solution for that day. The rest is history[^1]. In this small post, I will try to explain my rationale from coming up with a working solution written in APL, and shortening it by _incremental refactoring_.
+К осознанию миссии своей приходил я постепенно, и сейчас, оглядываясь назад, понимаю, что все будто предшествующие события подводили меня к этому поворотному моменту в жизни.
 
----
+> Миссия моя неоценима человеком, от того, в вашем мнении и не нуждаюсь вовсе, но до тех пор, пока не исполню ее - я преступник, укравший у вас познания опыт. Поэтому, гоните, отвергайте, презирайте и критикуйте меня, так как чтобы миссию свою исполнить я должен чувствовать боль, а коли боли нет, то и творить незачем."
 
-For this problem, my first solution was to get the digits of each number, sum them up, and find if they are divisible by checking the modulo to be zero (0). I flirted with using `∧` since it returns the greatest common divisor (GCD) between two numbers, and would allow me to check divisibility by comparing the GCD to the original number. This turned out to be more verbose. So I ended up with the following expression:
-
-```apl
-({0=(+/(⌊10|⍵∘÷)¨((10∘*)¨(⍳(⌈10⍟⍵+1))-1))|⍵}¨⍳100)/(⍳100)
-```
-
-The explanation is that `⍳(⌈10⍟⍵+1))-1)` generates a zero-based array $[0..]$ with length equal to the number of digits. Then, mapping `(10∘*)` would generate the powers of 10, as $[1, 10, 100, 1000..]$. This was used to get test each digit $a$ since:
-
-$$
-\left(\sum_{n=0}^{\lfloor log_{10}a \rfloor}\frac{a}{10^n}\text{ mod }10\right) \text{ mod } a = 0
-\equiv \begin{cases}
-1 & \text{if divisible,} \\
-0 & \text{otherwise.}
-\end{cases}
-$$
-
-...for which `⌊` gives the floor and `+/` the sum. The first part:
-
-```apl
-({0=(+/(⌊10|⍵∘÷)¨((10∘*)¨(⍳(⌈10⍟⍵+1))-1))|⍵}¨⍳100)
-```
-
-...thus returns a mask array:
-
-```
-1 1 1 1 1 1 1 1 1 1 0 1 0 0 0 0 0 1 0 1 1 0 0 1 ...
-```
-
-...and the replicate (dyadic `/`) filters out the elements in `⍳100` given that mask. Now that I had a working solution, it was time to:
-
-$\equiv$ { transform into a function and simplify operators precedence }<br>
-
-```apl
-niven←{({0=(+/(⌊10|⍵∘÷)¨(10∘*¨(⍳(⌈10⍟⍵+1))-1))|⍵}¨⍳⍵)/(⍳⍵)}
-niven←{({0=(+/(⌊10|⍵∘÷)¨(10∘*¨(⍳⌈10⍟⍵+1)-1))|⍵}¨⍳⍵)/⍳⍵}
-niven←{({0=(+/(⌊10|⍵∘÷)¨10*(⍳⌈10⍟⍵+1)-1)|⍵}¨⍳⍵)/⍳⍵}
-```
-
-At this point the internet taught be about `f⍣¯1`, which calculates the inverse function of `f`. How can this help? Well, another interesting thing is the _mixed radix conversion_ by dyadic `⊥`. For example `24 60 60 ⊥ 2 5 5` $= 7505 = 2\times60^2 + 5\times60^2 + 5$. This allows to specify the radix for each vector member, and it sums all up. For our case, we have something very similar, but the _mixed radix_ is always 10; for example `10 10 10 ⊥ 1 2 3 ↔ 123`. This can be generalized to `(10⊥⍣3⊢) 1 2 3 ↔ 123`. In our case, we want to go in the other direction. Enter the inverse, with `10⊥⍣¯1⊢ 123 ↔ 1 2 3`.
-
-$\equiv$ { changed strategy to get digits } <br>
-
-```apl
-niven←{({0=(+/(10⊥⍣¯1⊢)⍵)|⍵}¨⍳⍵)/⍳⍵}
-niven←{({0=(+/10⊥⍣¯1⊢⍵)|⍵}¨⍳⍵)/⍳⍵}
-```
-
-$\equiv$ { since monadic `⍸` helps in `(f¨⍳⍵)/⍳⍵ ↔ ⍸f¨⍳⍵` }<br>
-
-```apl
-niven←{⍸({0=(+/10⊥⍣¯1⊢⍵)|⍵}¨⍳⍵)}
-niven←{⍸{0=(+/10⊥⍣¯1⊢⍵)|⍵}¨⍳⍵}
-```
-
-We want to get rid of that extra `()`'s, but the way to get there is not that obvious:
-
-$\equiv$ { since `A|B ↔ B|⍨A` }<br>
-
-```apl
-niven←{⍸{0=⍵|⍨(+/10⊥⍣¯1⊢⍵)}¨⍳⍵}
-niven←{⍸{0=⍵|⍨+/10⊥⍣¯1⊢⍵}¨⍳⍵}
-```
-
-$\equiv$ { distribute modulo, and get rid of map `¨`}<br>
-
-```apl
-niven←{⍸0=(⍳⍵)|⍨+/10⊥⍣¯1⍳⍵}
-```
-
-... but this would result in a `LENGTH ERROR` due to the way `+/` is evaluated. One trick is to realise that:
-
-$\equiv$ { since `1⊥V ↔ +/V` }<br>
-
-```apl
-niven←{⍸0=(⍳⍵)|⍨1⊥10⊥⍣¯1⍳⍵}
-```
-
-$\equiv$ { tacit form to get rid of `⍵`, by factoring it out }
-
-```apl
-niven←{(⍸0=⍳|⍨1⊥10⊥⍣¯1⍳)⍵}
-niven←⍸0=⍳|⍨1⊥10⊥⍣¯1⍳
-```
-
-Which results in a solution with just 21 chars, including the function name. For reference, the [shortest solution proposed](https://github.com/hugoferreira/golf-during-covid/blob/master/day6.md) in Haskell at the time of this blog post was 62, and in Python was 72. Here's the result of all nivens between 1 and 100:
-
-```
-      niven 100
-1 2 3 4 5 6 7 8 9 10 12 18 20 21 24 27 30 36 40 42 45 48 50 54 60 63 70 72 80 81 84 90 100
-```
-
-[^1]: Opinions diverge if this was a valid way to preserve our mental health.
+По завершению речи, зал заполнился тишиной.
+Спустя только несколько мгновений, начал раздаваться звук одиночных, неуверенных аплодисментов, а за ними по цепочке и весь зал разразился шумом ликующей толпы.
+N смотрел на лица аплодирующих ему, но не видел в них понимания. Овации эти были не от осознания, а от стыда признаться себе и другим, что не поняли о чем была речь.
+И действительно не многие поняли выступающего.
+Один из них - старичок, стоявший в конце зала, в свободной белой рубашке, с седыми волосами и добрыми, искренними глазами. Он смотрел на оратора с понимающей улыбкой на лице и в глазах, от того и хлопать не стал - потому что знал, что ему-то как раз отсутствие аплодисментов и нужно.
+Другой - мужчина в черном костюме и с серьезным лицом, сидевшей на переднем ряду, холодным взглядом смотрел оратору в глаза. Он тоже не хлопал, но по другой причине.
+И хоть приятно было N, что восхищаются им, да только понимал в глубине души, что именно с этим то он и борется, для того то он и уходил со сцены, чтобы "другого" - кому эти аплодисменты нужны, победить. И для того возвращается, чтобы "другому" доказать, что уходил он не потому что восхищения не способен заслужить, а потому что восхищение это ему и не нужно.
+В этот момент, и поймал он взгляд старичка, того самого, что глядел на него с легкой улыбкой. И вдруг ему так стало стыдно перед ним - взлядом своим, он говорит будто ему: понял я, что обманщик ты, вот неискушенный народ тебе и верит. А от аплодисментов то ты и не отказываешся, будто заслужены они.
+«Чего же вы хлопаете? Я же говорю что не из благородства на сцену вышел, а чтобы «ему» больно сделать!» - не выдержав, крикнул он в толпу.
+«Гений!» - крикнул кто-то из зрителей.
+«Вот вы народ, говорю же вам: я лишь ребенок, жаждущий признания. Осознавший и уверовавший в бесталанность свою и направивший от отчаяния все силы свои на доказательство обратного. Я ребенка то этого победить и хочу, а вы лишь кормите его! Да чего я от вас хочу, вы же сами точно такие дети, безмятежно в незнании своем живущие.»
+«Ну вы поглядите, точно гений!» - выкрикнул кто-то вновь, после чего зал заполнили аплодисменты.
+Стоял N в растерянности, распираемый изнутри противоречием: хотелось броситься ему в толпу, окружить себя людьми с восторгом смотрящих на него, чего бы он не говорил; и одновременно с этим, другая часть него хотела всем и каждому указать на их глупость, на ошибку великую, снобическую, после чего развернуться и убежать в лес, чтобы не видеть никого.
+Смотрел он на хлопающих ему людей не только с разочарованием о непонятой мысли, но и с некоторым высокомерием: сам он в жизни ни кому не аплодировал. И тут взгляд его остановился на человеке в черном. Вмиг все высокомерие его испарилось, и даже появился какой-то страх.
+Хотел он увести от него свой взгляд, но не мог: слишком холодно-безразлично смотрел на него этот человек. Так и простоял он до окончания оваций. А как в зале стихло, человек в черном вдруг задал ему вопрос:
+"Вот вы говорите о миссии своей. Причем говорите претенциозно, уже как будто исполнив. И при том наше мнение обесценивая, говоря что "неоценима миссия человеком". Так как же вы тогда миссию свою исполните, ведь если оценить человеком её невозможно, то и не поймете: хорошо её сделали или нет. Или вы себя уже в "сверхчеловеки" записали? Я, знаете заметил ваш высокомерный взгляд, нелюбовь вашу к зрителю: оттого это, что готовитесь в глупости упрекнуть любого, кто "миссию" вашу не оценит. А коли не нужен вам зритель, то зачем же вы наше время тратите, засоряя пространство информационным шумом своим? Все уже придумано давно до вас, от чего же вам не пойти в лес и творить миссию свою для себя, без претензии и без ожидания?"
+Слушая эту речь, N начал постепенно заполняться изнутри холодным, опустошающим страхом - нашелся таки человек, который видит его насквозь, и не стесняясь ему об этом прямо говорит, да на глазах у всех зрителей.
+Хотел было он начать оправдание свое, как опустился занавес.
+Думал N, как же объяснить человеку в черном - да, именно ему одному, а не зрителям, противоречие свое. Причем объяснить так, чтобы безразличие сменилось на восхищение. Тут вспомнил он лицо старичка, улыбающегося ему из конца зала. Понял он вдруг, что тот его не пристыжал, а понимая, из сострадания улыбался.
+Захотелось ему выйти из-за занавеса, и рассказать все:
+Рассказать что он действительно обманщик, кажущийся больше чем он есть, но желающий страстно стать тем, кем кажется;
+Рассказать о миссии своей, о том, что не осуществлять ее он и не может вовсе, но от осознания бессмысленности, от страха того, что не оценят ее, начать не может.
+Рассказать о том, что зрителя не он не любит, а "другой", тот кто аплодисменты эти считает вполне заслуженными, о том, что он на сцену ради человека в черном и возвращается, чтобы тому "другому" причинить боль.
+Как вдруг открывается занавес, и воодушевленный оратор делает шаг вперед. Но выйдя на сцену, в миг осознает он, что зал пуст. Смотрит на место человека в черном и чувствует на себе, хоть и не видит, холодный взгляд его. Хотел было опустить глаза в пол, чтобы не видеть поражения своего, как вспомнил о старичке, о его понимающей улыбке, от чего сам над собою усмехнулся и начал миссию свою.

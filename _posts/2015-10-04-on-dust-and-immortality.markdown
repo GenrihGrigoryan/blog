@@ -5,6 +5,7 @@ date: 2015-10-04 03:49
 comments: true
 external-url:
 categories: Philosophy
+tags: classic_hollywood second hololens
 ---
 
 The [Dust Theory](http://en.wikipedia.org/wiki/Permutation_City), by Greg Egan, states that:

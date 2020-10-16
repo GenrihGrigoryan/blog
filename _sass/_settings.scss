@@ -1,19 +1,25 @@
-$base-font-family:  'Merriweather', Georgia, Times, 'Times New Roman', serif;
-$base-font-size:    12.4pt;
+$Serif: 'Noto Serif' , serif; //'Cormorant Garamond' //'Cormorant' //'EB Garamond' //'Playfair Display'
+$SansSerif: 'Manrope'  , sans-serif; //'Open Sans' //'Roboto' // // //'Noto Sans'
+$Monospace: 'Playfair Display', serif;
+
+$FinalFont: $Serif;
+
+$base-font-family:  $FinalFont;
+$base-font-size:    1.2em;
 $base-font-weight:  400;
 $bold-font-weight:  700;
-$base-line-height:  1.7;
+$base-line-height:  1.65;
 
-$title-font-family: 'PT Serif', Georgia, Times, 'Times New Roman', serif;
-$header-font-family: 'Merriweather', Georgia, Times, 'Times New Roman', serif;
-$header-font-weight: 700;
+$title-font-family: $FinalFont;
+$header-font-family: $FinalFont;
+$header-font-weight: 600;
 
-$small-font-size:   $base-font-size * 0.875;
+$small-font-size:   $base-font-size * 0.8;
 
 $mono-font-family: 'Fira Code';
 $mono-font-size:   11pt;
 
-$text-color:       hsl(0, 0%, 25%);
+$text-color:       hsl(0, 0%, 20%);
 
 $alt-color:        hsl(0, 70%, 46%);
 $alt-color-darker: darken($alt-color, 6%);
