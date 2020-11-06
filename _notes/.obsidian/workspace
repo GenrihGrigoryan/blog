@@ -1,0 +1,82 @@
+{
+  "main": {
+    "id": "6eed8867a760d990",
+    "type": "split",
+    "children": [
+      {
+        "id": "598c9011eef23ced",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Untitled.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2ffa7a003ab96c80",
+    "type": "split",
+    "children": [
+      {
+        "id": "8aa86d3c4103a780",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0bc2777ff93213be",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "dfccc017b2112667",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": ""
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "59d312ba8f0598fa",
+    "type": "split",
+    "children": [
+      {
+        "id": "c74f0243da381106",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6372114b712af628",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Untitled.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "Untitled.md",
+    "How to use the special features.md"
+  ]
+}

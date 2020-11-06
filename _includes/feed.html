@@ -2,6 +2,7 @@
 
 {%- if page.permalink == "/" -%}
     {%- for item in site.notes -%}
+    <!--
         {%- if item.season == 'summer' -%}
         <div class="feed-title-excerpt-block disable-select" data-url="{{site.url}}{{item.url}}">
             <a href="{{item.url}}" style="text-decoration: none; color: #555555;">
@@ -20,7 +21,20 @@
             </a>
         </div>
         {%- endif -%}
+        -->
+        <div class="feed-title-excerpt-block disable-select" data-url="{{site.url}}{{item.url}}">
+            <a href="{{item.url}}" style="text-decoration: none; color: #555555;">
+               <ul style="padding-left: 20px; margin-top: 20px;" class="tags">
+                 {%- for tag in item.tags -%}
+                    <li style="padding: 0 5px 5x 0; border-radius: 10px; margin-right: 10px" class="tag">{{tag}}</li> 
+                 {%- endfor -%}
+                </ul>
+                <p style="margin-top: 10px;" class="feed-title">{{ item.title }}</p>
+                             <p class="feed-excerpt">{{ item.content | strip_html | strip | escape | truncate: 250}}</p> 
+            </a>
+        </div>
     {%- endfor -%}
+    <!--
     {%- for item in site.notes -%}
         {%- if item.season == 'spring' -%}
         <div class="feed-title-excerpt-block disable-select" data-url="{{site.url}}{{item.url}}">
@@ -61,6 +75,7 @@
         </div>
         {%- endif -%}
         {%- endfor -%}
+        -->
 {%- endif -%}
 
 {%- if page.permalink == "/notes" -%}

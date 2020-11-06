@@ -1,0 +1,108 @@
+{
+  "main": {
+    "id": "6809ba69a38b2718",
+    "type": "split",
+    "children": [
+      {
+        "id": "9fb0582cfa03ce21",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "_notes/How-to-setup-this-site 1 1 1 1 1.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5980bc46415769bc",
+    "type": "split",
+    "children": [
+      {
+        "id": "0cfc73e4378b5e66",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "38dc4df994887597",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "0c30a4522e8e0c8c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": ""
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "515e6d5d8cdf98f1",
+    "type": "split",
+    "children": [
+      {
+        "id": "13147abba23d7163",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0606b3ee8e8aad32",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_notes/How-to-setup-this-site 1 1 1 1 1.md"
+              }
+            }
+          },
+          {
+            "id": "eeac903eaf2cc6e9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {}
+            }
+          },
+          {
+            "id": "c02e6ed8d65f4250",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_notes/How-to-setup-this-site 1 1 1 1 1.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "_notes/How-to-setup-this-site 1 1 1 1 1.md",
+    "_notes/How-to-setup-this-site 1 1 1 1 1 1.md",
+    "_notes/How-to-setup-this-site 1 1 1 1 1 1 1.md",
+    "_notes/How-to-setup-this-site 1 1 1 1 1 1 1 1 1 1 1.md",
+    "_notes/Moonlight.md",
+    "templates/Template.md",
+    "_notes/how-markdown-is-rendered.md",
+    "_notes/How to use the special features.md",
+    "_notes/test.md",
+    "_notes/Obsidian integration.md"
+  ]
+}
